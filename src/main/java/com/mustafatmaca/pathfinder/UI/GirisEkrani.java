@@ -6,8 +6,13 @@
 package com.mustafatmaca.pathfinder.UI;
 
 
+import com.mongodb.client.MongoClient;
+import com.mustafatmaca.pathfinder.database.database;
+import com.mustafatmaca.pathfinder.models.Kullanıcı;
+
+import javax.swing.*;
+
 /**
- *
  * @author Muallim
  */
 public class GirisEkrani extends javax.swing.JFrame {
@@ -144,17 +149,33 @@ public class GirisEkrani extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKayitOlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKayitOlActionPerformed
-        // TODO add your handling code here:
         KayitEkrani kayitEkrani = new KayitEkrani();
         kayitEkrani.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnKayitOlActionPerformed
 
     private void btnGirisYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGirisYapActionPerformed
-        // TODO add your handling code here:
-        AnaEkran anaEkran = new AnaEkran();
-        anaEkran.setVisible(true);
-        setVisible(false);
+        database database = new database();
+        MongoClient mongoClient = database.connectDb();
+
+        if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty()){
+            Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText());
+            if(database.girisKontrol(mongoClient, kullanıcı)){
+
+                AnaEkran anaEkran = new AnaEkran();
+                anaEkran.kullanıcıBilgi(kullanıcı);
+                anaEkran.setVisible(true);
+                setVisible(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Hesap Bulunamadı!");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Alanları boş bırakmayınız!");
+        }
+
+
     }//GEN-LAST:event_btnGirisYapActionPerformed
 
     /**

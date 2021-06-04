@@ -5,10 +5,11 @@
  */
 package com.mustafatmaca.pathfinder.UI;
 
+import com.mustafatmaca.pathfinder.models.Kullanıcı;
+
 import java.awt.CardLayout;
 
 /**
- *
  * @author Muallim
  */
 public class AnaEkran extends javax.swing.JFrame {
@@ -397,6 +398,10 @@ public class AnaEkran extends javax.swing.JFrame {
                 new AnaEkran().setVisible(true);
             }
         });
+    }
+
+    public void kullanıcıBilgi(Kullanıcı kullanıcı){
+        jLabel3.setText("Hoşgeldiniz " + kullanıcı.getKullaniciAdi());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

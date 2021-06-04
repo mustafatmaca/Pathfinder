@@ -1,6 +1,6 @@
 package com.mustafatmaca.pathfinder.models;
 
-/*
+/**
  * @author Muallim
  */
 public class Gezgin extends Kullanıcı{

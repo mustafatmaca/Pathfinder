@@ -1,13 +1,16 @@
 package com.mustafatmaca.pathfinder.database;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mustafatmaca.pathfinder.models.Kullanıcı;
 import org.bson.Document;
 
-public class connection {
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
+
+/**
+ * @author Muallim
+ */
+public class database {
 
     public MongoClient connectDb(){
 
@@ -24,6 +27,7 @@ public class connection {
     }
 
     public void kayıtOlustur(MongoClient mongoClient, Kullanıcı kullanıcı){
+
         MongoCollection<Document> kullanicilar = mongoClient.getDatabase("pfdatabase").getCollection("kullanicilar");
         Document document = new Document("kullaniciAdi", kullanıcı.getKullaniciAdi())
                 .append("sifre", kullanıcı.getSifre())
@@ -32,6 +36,28 @@ public class connection {
                 .append("sehir", kullanıcı.getSehir());
         kullanicilar.insertOne(document);
 
+    }
+
+    public boolean kayitKontrol(MongoClient mongoClient, Kullanıcı kullanıcı){
+        MongoCollection<Document> kullanicilar = mongoClient.getDatabase("pfdatabase").getCollection("kullanicilar");
+        Document doc = kullanicilar.find(eq("email", kullanıcı.getEmail())).first();
+        if (doc == null){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public boolean girisKontrol(MongoClient mongoClient, Kullanıcı kullanıcı){
+        MongoCollection<Document> kullanicilar = mongoClient.getDatabase("pfdatabase").getCollection("kullanicilar");
+        Document doc = kullanicilar.find(and(eq("kullaniciAdi", kullanıcı.getKullaniciAdi()), eq("sifre", kullanıcı.getSifre()))).first();
+        if (doc == null){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
 }

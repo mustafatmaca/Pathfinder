@@ -6,11 +6,12 @@
 package com.mustafatmaca.pathfinder.UI;
 
 import com.mongodb.client.MongoClient;
-import com.mustafatmaca.pathfinder.database.connection;
+import com.mustafatmaca.pathfinder.database.database;
 import com.mustafatmaca.pathfinder.models.Kullanıcı;
 
+import javax.swing.*;
+
 /**
- *
  * @author Muallim
  */
 public class KayitEkrani extends javax.swing.JFrame {
@@ -86,21 +87,22 @@ public class KayitEkrani extends javax.swing.JFrame {
         tfKullaniciAdi.setBorder(null);
 
         pfSifre.setBackground(new java.awt.Color(255, 204, 51));
+        pfSifre.setToolTipText("Şifrenizi giriniz.");
         pfSifre.setBorder(null);
 
         tfEmail.setBackground(new java.awt.Color(255, 204, 51));
         tfEmail.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        tfEmail.setToolTipText("Kullanıcı adınızı giriniz.");
+        tfEmail.setToolTipText("Email giriniz.");
         tfEmail.setBorder(null);
 
         tfGsm.setBackground(new java.awt.Color(255, 204, 51));
         tfGsm.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        tfGsm.setToolTipText("Kullanıcı adınızı giriniz.");
+        tfGsm.setToolTipText("GSM giriniz.");
         tfGsm.setBorder(null);
 
         tfSehir.setBackground(new java.awt.Color(255, 204, 51));
         tfSehir.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        tfSehir.setToolTipText("Kullanıcı adınızı giriniz.");
+        tfSehir.setToolTipText("Şehir giriniz.");
         tfSehir.setBorder(null);
 
         btnHesabimVar.setBackground(new java.awt.Color(255, 204, 51));
@@ -215,14 +217,28 @@ public class KayitEkrani extends javax.swing.JFrame {
 
     private void btnKayitOlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKayitOlActionPerformed
         // TODO add your handling code here:
-        connection connection = new connection();
-        MongoClient mongoClient = connection.connectDb();
+        database database = new database();
+        MongoClient mongoClient = database.connectDb();
 
-        Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
-        connection.kayıtOlustur(mongoClient, kullanıcı);
-        GirisEkrani girisEkrani = new GirisEkrani();
-        girisEkrani.setVisible(true);
-        setVisible(false);
+        if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && tfGsm.getText().isEmpty() && tfSehir.getText().isEmpty()){
+            Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
+            if(!database.kayitKontrol(mongoClient, kullanıcı)){
+                database.kayıtOlustur(mongoClient, kullanıcı);
+
+                GirisEkrani girisEkrani = new GirisEkrani();
+                girisEkrani.setVisible(true);
+                setVisible(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Bu email adresine kayıtlı bir hesap var!");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Alanları boş bırakmayınız!");
+        }
+
+
+
     }//GEN-LAST:event_btnKayitOlActionPerformed
 
     /**
