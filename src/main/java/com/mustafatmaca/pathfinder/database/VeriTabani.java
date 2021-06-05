@@ -10,8 +10,21 @@ import static com.mongodb.client.model.Filters.eq;
 /**
  * @author Muallim
  */
-public class database {
+public class VeriTabani {
+    private MongoClient mongoClient;
+    private MongoDatabase database;
 
+    public VeriTabani() {
+        try {
+            this.mongoClient = MongoClients.create("mongodb+srv://muallim:abc1234@pfdatabase.y5owz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            this.database = mongoClient.getDatabase("pfdatabase");
+        } catch (Error e){
+
+        }
+    }
+
+
+    /*
     public MongoClient connectDb(){
 
         try {
@@ -25,10 +38,11 @@ public class database {
         }
         return null;
     }
+    */
 
-    public void kayıtOlustur(MongoClient mongoClient, Kullanıcı kullanıcı){
+    public void kayıtOlustur(VeriTabani VeriTabani, Kullanıcı kullanıcı){
 
-        MongoCollection<Document> kullanicilar = mongoClient.getDatabase("pfdatabase").getCollection("kullanicilar");
+        MongoCollection<Document> kullanicilar = VeriTabani.database.getCollection("kullanicilar");
         Document document = new Document("kullaniciAdi", kullanıcı.getKullaniciAdi())
                 .append("sifre", kullanıcı.getSifre())
                 .append("email", kullanıcı.getEmail())
@@ -38,8 +52,8 @@ public class database {
 
     }
 
-    public boolean kayitKontrol(MongoClient mongoClient, Kullanıcı kullanıcı){
-        MongoCollection<Document> kullanicilar = mongoClient.getDatabase("pfdatabase").getCollection("kullanicilar");
+    public boolean kayitKontrol(VeriTabani VeriTabani, Kullanıcı kullanıcı){
+        MongoCollection<Document> kullanicilar = VeriTabani.database.getCollection("kullanicilar");
         Document doc = kullanicilar.find(eq("email", kullanıcı.getEmail())).first();
         if (doc == null){
             return false;
@@ -49,8 +63,8 @@ public class database {
         }
     }
 
-    public boolean girisKontrol(MongoClient mongoClient, Kullanıcı kullanıcı){
-        MongoCollection<Document> kullanicilar = mongoClient.getDatabase("pfdatabase").getCollection("kullanicilar");
+    public boolean girisKontrol(VeriTabani VeriTabani, Kullanıcı kullanıcı){
+        MongoCollection<Document> kullanicilar = VeriTabani.database.getCollection("kullanicilar");
         Document doc = kullanicilar.find(and(eq("kullaniciAdi", kullanıcı.getKullaniciAdi()), eq("sifre", kullanıcı.getSifre()))).first();
         if (doc == null){
             return false;

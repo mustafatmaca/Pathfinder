@@ -5,8 +5,7 @@
  */
 package com.mustafatmaca.pathfinder.UI;
 
-import com.mongodb.client.MongoClient;
-import com.mustafatmaca.pathfinder.database.database;
+import com.mustafatmaca.pathfinder.database.VeriTabani;
 import com.mustafatmaca.pathfinder.models.Kullanıcı;
 
 import javax.swing.*;
@@ -217,13 +216,12 @@ public class KayitEkrani extends javax.swing.JFrame {
 
     private void btnKayitOlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKayitOlActionPerformed
         // TODO add your handling code here:
-        database database = new database();
-        MongoClient mongoClient = database.connectDb();
+        VeriTabani VeriTabani = new VeriTabani();
 
         if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && tfGsm.getText().isEmpty() && tfSehir.getText().isEmpty()){
             Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
-            if(!database.kayitKontrol(mongoClient, kullanıcı)){
-                database.kayıtOlustur(mongoClient, kullanıcı);
+            if(!VeriTabani.kayitKontrol(VeriTabani, kullanıcı)){
+                VeriTabani.kayıtOlustur(VeriTabani, kullanıcı);
 
                 GirisEkrani girisEkrani = new GirisEkrani();
                 girisEkrani.setVisible(true);

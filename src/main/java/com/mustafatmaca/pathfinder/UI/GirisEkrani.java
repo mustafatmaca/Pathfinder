@@ -6,8 +6,7 @@
 package com.mustafatmaca.pathfinder.UI;
 
 
-import com.mongodb.client.MongoClient;
-import com.mustafatmaca.pathfinder.database.database;
+import com.mustafatmaca.pathfinder.database.VeriTabani;
 import com.mustafatmaca.pathfinder.models.Kullanıcı;
 
 import javax.swing.*;
@@ -155,12 +154,11 @@ public class GirisEkrani extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKayitOlActionPerformed
 
     private void btnGirisYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGirisYapActionPerformed
-        database database = new database();
-        MongoClient mongoClient = database.connectDb();
+        VeriTabani VeriTabani = new VeriTabani();
 
         if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty()){
             Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText());
-            if(database.girisKontrol(mongoClient, kullanıcı)){
+            if(VeriTabani.girisKontrol(VeriTabani, kullanıcı)){
 
                 AnaEkran anaEkran = new AnaEkran();
                 anaEkran.kullanıcıBilgi(kullanıcı);
