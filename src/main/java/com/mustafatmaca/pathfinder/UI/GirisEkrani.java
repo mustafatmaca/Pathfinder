@@ -7,7 +7,7 @@ package com.mustafatmaca.pathfinder.UI;
 
 
 import com.mustafatmaca.pathfinder.database.VeriTabani;
-import com.mustafatmaca.pathfinder.models.Kullanıcı;
+import com.mustafatmaca.pathfinder.models.Kullanici;
 
 import javax.swing.*;
 
@@ -157,11 +157,11 @@ public class GirisEkrani extends javax.swing.JFrame {
         VeriTabani VeriTabani = new VeriTabani();
 
         if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty()){
-            Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText());
+            Kullanici kullanıcı = new Kullanici(tfKullaniciAdi.getText(), pfSifre.getText());
             if(VeriTabani.girisKontrol(VeriTabani, kullanıcı)){
 
                 AnaEkran anaEkran = new AnaEkran();
-                anaEkran.kullanıcıBilgi(kullanıcı);
+                anaEkran.kullanıcıBilgi(VeriTabani, kullanıcı);
                 anaEkran.setVisible(true);
                 setVisible(false);
             }

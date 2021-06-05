@@ -3,7 +3,7 @@ package com.mustafatmaca.pathfinder.models;
 /**
  * @author Muallim
  */
-public class Rehber extends Kullanıcı{
+public class Rehber extends Kullanici {
     private int puan;
     
     

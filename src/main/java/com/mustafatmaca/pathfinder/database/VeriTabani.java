@@ -1,7 +1,7 @@
 package com.mustafatmaca.pathfinder.database;
 
 import com.mongodb.client.*;
-import com.mustafatmaca.pathfinder.models.Kullanıcı;
+import com.mustafatmaca.pathfinder.models.Kullanici;
 import org.bson.Document;
 
 import static com.mongodb.client.model.Filters.and;
@@ -12,6 +12,15 @@ import static com.mongodb.client.model.Filters.eq;
  */
 public class VeriTabani {
     private MongoClient mongoClient;
+
+    public MongoDatabase getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(MongoDatabase database) {
+        this.database = database;
+    }
+
     private MongoDatabase database;
 
     public VeriTabani() {
@@ -40,9 +49,9 @@ public class VeriTabani {
     }
     */
 
-    public void kayıtOlustur(VeriTabani VeriTabani, Kullanıcı kullanıcı){
+    public void kayitOlustur(VeriTabani veritabani, Kullanici kullanıcı){
 
-        MongoCollection<Document> kullanicilar = VeriTabani.database.getCollection("kullanicilar");
+        MongoCollection<Document> kullanicilar = veritabani.database.getCollection("kullanicilar");
         Document document = new Document("kullaniciAdi", kullanıcı.getKullaniciAdi())
                 .append("sifre", kullanıcı.getSifre())
                 .append("email", kullanıcı.getEmail())
@@ -52,8 +61,23 @@ public class VeriTabani {
 
     }
 
-    public boolean kayitKontrol(VeriTabani VeriTabani, Kullanıcı kullanıcı){
-        MongoCollection<Document> kullanicilar = VeriTabani.database.getCollection("kullanicilar");
+    public Kullanici kullaniciAl(VeriTabani veritabani, Kullanici kullanıcı){
+        MongoCollection<Document> kullanicilar = veritabani.database.getCollection("kullanicilar");
+        Document doc = kullanicilar.find(and(eq("kullaniciAdi", kullanıcı.getKullaniciAdi()), eq("sifre", kullanıcı.getSifre()))).first();
+        if (doc == null){
+            return null;
+        }
+        else {
+            Object[] objects = doc.values().toArray();
+            Kullanici dbKullanici = new Kullanici(objects[1].toString(),objects[2].toString(),objects[3].toString(),objects[4].toString(),objects[5].toString());
+
+            return dbKullanici;
+        }
+
+    }
+
+    public boolean kayitKontrol(VeriTabani veritabani, Kullanici kullanıcı){
+        MongoCollection<Document> kullanicilar = veritabani.database.getCollection("kullanicilar");
         Document doc = kullanicilar.find(eq("email", kullanıcı.getEmail())).first();
         if (doc == null){
             return false;
@@ -63,8 +87,8 @@ public class VeriTabani {
         }
     }
 
-    public boolean girisKontrol(VeriTabani VeriTabani, Kullanıcı kullanıcı){
-        MongoCollection<Document> kullanicilar = VeriTabani.database.getCollection("kullanicilar");
+    public boolean girisKontrol(VeriTabani veritabani, Kullanici kullanıcı){
+        MongoCollection<Document> kullanicilar = veritabani.database.getCollection("kullanicilar");
         Document doc = kullanicilar.find(and(eq("kullaniciAdi", kullanıcı.getKullaniciAdi()), eq("sifre", kullanıcı.getSifre()))).first();
         if (doc == null){
             return false;
@@ -73,5 +97,24 @@ public class VeriTabani {
             return true;
         }
     }
+
+    /*
+
+    ////Şehirleri veritabanına eklemek için kullandığım method
+
+    public void sehirEkleme(VeriTabani VeriTabani) throws FileNotFoundException {
+        List<String> cities = new ArrayList<String>();
+        File file = new File("dosya yolu");  //dosya yolu belirtilir
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()){
+            cities.add(scanner.nextLine());
+        }
+        for (String city: cities) {
+            MongoCollection<Document> sehirler = VeriTabani.database.getCollection("sehirler");
+            Document document = new Document("sehir", city);
+            sehirler.insertOne(document);
+        }
+    }
+     */
 
 }

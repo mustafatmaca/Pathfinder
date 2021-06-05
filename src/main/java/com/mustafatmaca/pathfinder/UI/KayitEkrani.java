@@ -6,7 +6,7 @@
 package com.mustafatmaca.pathfinder.UI;
 
 import com.mustafatmaca.pathfinder.database.VeriTabani;
-import com.mustafatmaca.pathfinder.models.Kullanıcı;
+import com.mustafatmaca.pathfinder.models.Kullanici;
 
 import javax.swing.*;
 
@@ -219,9 +219,9 @@ public class KayitEkrani extends javax.swing.JFrame {
         VeriTabani VeriTabani = new VeriTabani();
 
         if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && tfGsm.getText().isEmpty() && tfSehir.getText().isEmpty()){
-            Kullanıcı kullanıcı = new Kullanıcı(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
+            Kullanici kullanıcı = new Kullanici(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
             if(!VeriTabani.kayitKontrol(VeriTabani, kullanıcı)){
-                VeriTabani.kayıtOlustur(VeriTabani, kullanıcı);
+                VeriTabani.kayitOlustur(VeriTabani, kullanıcı);
 
                 GirisEkrani girisEkrani = new GirisEkrani();
                 girisEkrani.setVisible(true);
