@@ -87,7 +87,6 @@ public class AnaEkran extends javax.swing.JFrame {
         btnSil = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         pnlSekme.setBackground(new java.awt.Color(51, 51, 51));
         pnlSekme.setPreferredSize(new java.awt.Dimension(200, 575));
@@ -265,9 +264,12 @@ public class AnaEkran extends javax.swing.JFrame {
         lblSehirSec.setText("Şehir Seç : ");
 
         jComboBox1.setBackground(new java.awt.Color(255, 204, 51));
+        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jList1.setBackground(new java.awt.Color(51, 51, 51));
         jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jList1.setForeground(new java.awt.Color(255, 204, 51));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -309,8 +311,11 @@ public class AnaEkran extends javax.swing.JFrame {
         lblDurum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDurum.setText("Durum : ");
 
+        btnRehberlikYap.setBackground(new java.awt.Color(51, 51, 51));
         btnRehberlikYap.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRehberlikYap.setForeground(new java.awt.Color(255, 204, 51));
         btnRehberlikYap.setText("Rehberlik Yap");
+        btnRehberlikYap.setFocusPainted(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -430,11 +435,35 @@ public class AnaEkran extends javax.swing.JFrame {
         lblAyarSehir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblAyarSehir.setText("Şehir : ");
 
+        tfAyarAd.setBackground(new java.awt.Color(51, 51, 51));
+        tfAyarAd.setForeground(new java.awt.Color(255, 204, 51));
+
+        tfAyarEmail.setBackground(new java.awt.Color(51, 51, 51));
+        tfAyarEmail.setForeground(new java.awt.Color(255, 204, 51));
+
+        tfAyarGsm.setBackground(new java.awt.Color(51, 51, 51));
+        tfAyarGsm.setForeground(new java.awt.Color(255, 204, 51));
+
+        jComboBox2.setBackground(new java.awt.Color(255, 204, 51));
+        jComboBox2.setForeground(new java.awt.Color(51, 51, 51));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnGuncelle.setText("Güncelle");
+        pfAyarSifre.setBackground(new java.awt.Color(51, 51, 51));
+        pfAyarSifre.setForeground(new java.awt.Color(255, 204, 51));
 
+        btnGuncelle.setBackground(new java.awt.Color(51, 51, 51));
+        btnGuncelle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGuncelle.setForeground(new java.awt.Color(255, 204, 51));
+        btnGuncelle.setText("Güncelle");
+        btnGuncelle.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGuncelle.setFocusPainted(false);
+
+        btnSil.setBackground(new java.awt.Color(51, 51, 51));
+        btnSil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSil.setForeground(new java.awt.Color(255, 204, 51));
         btnSil.setText("Hesabı Kalıcı Olarak Sil");
+        btnSil.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSil.setFocusPainted(false);
 
         javax.swing.GroupLayout crdAyarlarLayout = new javax.swing.GroupLayout(crdAyarlar);
         crdAyarlar.setLayout(crdAyarlarLayout);
@@ -445,6 +474,9 @@ public class AnaEkran extends javax.swing.JFrame {
                     .addGroup(crdAyarlarLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSil, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(crdAyarlarLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuncelle, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -460,42 +492,35 @@ public class AnaEkran extends javax.swing.JFrame {
                                 .addComponent(lblAyarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfAyarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(49, 49, 49)
+                        .addGap(35, 35, 35)
                         .addComponent(lblAyarSifre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(pfAyarSifre))
-                    .addGroup(crdAyarlarLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGuncelle, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
-                        .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
-                                .addGap(189, 189, 189)
-                                .addComponent(lblAyarBaslik, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
-                                .addGap(468, 468, 468)
-                                .addComponent(lblAyarGsm, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfAyarGsm, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(189, 189, 189)
+                        .addComponent(lblAyarBaslik, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
+                        .addGap(454, 454, 454)
+                        .addComponent(lblAyarGsm, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAyarGsm, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         crdAyarlarLayout.setVerticalGroup(
             crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crdAyarlarLayout.createSequentialGroup()
-                .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(lblAyarBaslik, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(crdAyarlarLayout.createSequentialGroup()
-                        .addComponent(lblAyarBaslik, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(crdAyarlarLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfAyarAd, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                                    .addComponent(lblAyarAd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(crdAyarlarLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(pfAyarSifre))))
-                    .addComponent(lblAyarSifre, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfAyarAd, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                            .addComponent(lblAyarAd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(crdAyarlarLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pfAyarSifre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                            .addComponent(lblAyarSifre, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAyarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
