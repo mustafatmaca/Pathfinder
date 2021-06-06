@@ -160,8 +160,8 @@ public class GirisEkrani extends javax.swing.JFrame {
             Kullanici kullanıcı = new Kullanici(tfKullaniciAdi.getText(), pfSifre.getText());
             if(VeriTabani.girisKontrol(VeriTabani, kullanıcı)){
 
-                AnaEkran anaEkran = new AnaEkran();
-                anaEkran.kullanıcıBilgi(VeriTabani, kullanıcı);
+                AnaEkran anaEkran = new AnaEkran(kullanıcı);
+                anaEkran.kullanıcıBilgi();
                 anaEkran.setVisible(true);
                 setVisible(false);
             }

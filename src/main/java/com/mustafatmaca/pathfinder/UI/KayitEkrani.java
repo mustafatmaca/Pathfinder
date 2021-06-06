@@ -218,7 +218,7 @@ public class KayitEkrani extends javax.swing.JFrame {
         // TODO add your handling code here:
         VeriTabani VeriTabani = new VeriTabani();
 
-        if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && tfGsm.getText().isEmpty() && tfSehir.getText().isEmpty()){
+        if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && !tfGsm.getText().isEmpty() && !tfSehir.getText().isEmpty()){
             Kullanici kullanıcı = new Kullanici(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
             if(!VeriTabani.kayitKontrol(VeriTabani, kullanıcı)){
                 VeriTabani.kayitOlustur(VeriTabani, kullanıcı);

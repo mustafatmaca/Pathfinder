@@ -8,22 +8,22 @@ package com.mustafatmaca.pathfinder.UI;
 import com.mustafatmaca.pathfinder.database.VeriTabani;
 import com.mustafatmaca.pathfinder.models.Kullanici;
 
+import javax.swing.*;
 import java.awt.CardLayout;
-
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
 
 /**
  * @author Muallim
  */
 public class AnaEkran extends javax.swing.JFrame {
+    Kullanici kullanici;
 
-    /**
-     * Creates new form AnaSayfa
-     */
+            /**
+             * Creates new form AnaSayfa
+             */
     CardLayout cardLayout;
     
-    public AnaEkran() {
+    public AnaEkran(Kullanici kullanici) {
+        this.kullanici = kullanici;
         initComponents();
         
         cardLayout = (CardLayout)(pnlCards.getLayout());
@@ -57,7 +57,7 @@ public class AnaEkran extends javax.swing.JFrame {
         lblAyarlar = new javax.swing.JLabel();
         crdRehberBul = new javax.swing.JPanel();
         lblSehirSec = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbSehir = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         crdRehberOl = new javax.swing.JPanel();
@@ -81,7 +81,7 @@ public class AnaEkran extends javax.swing.JFrame {
         tfAyarAd = new javax.swing.JTextField();
         tfAyarEmail = new javax.swing.JTextField();
         tfAyarGsm = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbAyarSehir = new javax.swing.JComboBox<>();
         pfAyarSifre = new javax.swing.JPasswordField();
         btnGuncelle = new javax.swing.JButton();
         btnSil = new javax.swing.JButton();
@@ -263,9 +263,9 @@ public class AnaEkran extends javax.swing.JFrame {
         lblSehirSec.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSehirSec.setText("Şehir Seç : ");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 204, 51));
-        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSehir.setBackground(new java.awt.Color(51, 51, 51));
+        cbSehir.setForeground(new java.awt.Color(255, 204, 51));
+        cbSehir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jList1.setBackground(new java.awt.Color(51, 51, 51));
         jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -288,7 +288,7 @@ public class AnaEkran extends javax.swing.JFrame {
                     .addGroup(crdRehberBulLayout.createSequentialGroup()
                         .addComponent(lblSehirSec, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, 787, Short.MAX_VALUE)))
+                        .addComponent(cbSehir, 0, 787, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         crdRehberBulLayout.setVerticalGroup(
@@ -297,7 +297,7 @@ public class AnaEkran extends javax.swing.JFrame {
                 .addGap(91, 91, 91)
                 .addGroup(crdRehberBulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSehirSec, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSehir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                 .addContainerGap())
@@ -316,6 +316,11 @@ public class AnaEkran extends javax.swing.JFrame {
         btnRehberlikYap.setForeground(new java.awt.Color(255, 204, 51));
         btnRehberlikYap.setText("Rehberlik Yap");
         btnRehberlikYap.setFocusPainted(false);
+        btnRehberlikYap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRehberlikYapActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -444,9 +449,9 @@ public class AnaEkran extends javax.swing.JFrame {
         tfAyarGsm.setBackground(new java.awt.Color(51, 51, 51));
         tfAyarGsm.setForeground(new java.awt.Color(255, 204, 51));
 
-        jComboBox2.setBackground(new java.awt.Color(255, 204, 51));
-        jComboBox2.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAyarSehir.setBackground(new java.awt.Color(51, 51, 51));
+        cbAyarSehir.setForeground(new java.awt.Color(255, 204, 51));
+        cbAyarSehir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         pfAyarSifre.setBackground(new java.awt.Color(51, 51, 51));
         pfAyarSifre.setForeground(new java.awt.Color(255, 204, 51));
@@ -464,6 +469,11 @@ public class AnaEkran extends javax.swing.JFrame {
         btnSil.setText("Hesabı Kalıcı Olarak Sil");
         btnSil.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSil.setFocusPainted(false);
+        btnSil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSilActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout crdAyarlarLayout = new javax.swing.GroupLayout(crdAyarlar);
         crdAyarlar.setLayout(crdAyarlarLayout);
@@ -483,7 +493,7 @@ public class AnaEkran extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
                                 .addComponent(lblAyarSehir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cbAyarSehir, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, crdAyarlarLayout.createSequentialGroup()
                                 .addComponent(lblAyarAd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -530,7 +540,7 @@ public class AnaEkran extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(crdAyarlarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblAyarSehir, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(jComboBox2))
+                    .addComponent(cbAyarSehir))
                 .addGap(18, 18, 18)
                 .addComponent(btnGuncelle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
@@ -594,6 +604,52 @@ public class AnaEkran extends javax.swing.JFrame {
         cardLayout.show(pnlCards, "pnlCard3");
     }//GEN-LAST:event_btnRehberOlActionPerformed
 
+    private void btnSilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSilActionPerformed
+        VeriTabani veriTabani = new VeriTabani();
+        Kullanici kullanici = this.kullanici;
+        kullanici = veriTabani.kullaniciAl(veriTabani, kullanici);
+
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Hesabınızı kalıcı olarak silmeyi onaylıyor musunuz?");
+        if (dialogResult == JOptionPane.YES_OPTION){
+            veriTabani.deleteUser(veriTabani, kullanici);
+
+            GirisEkrani girisEkrani = new GirisEkrani();
+            girisEkrani.setVisible(true);
+            setVisible(false);
+        }
+
+
+        //if (!tfAyarAd.getText().isEmpty() && !pfAyarSifre.getText().isEmpty()){
+            //Kullanici kullanici = new Kullanici(tfAyarAd.getText(), pfAyarSifre.getText());
+            //veriTabani.deleteUser(veriTabani, kullanici);
+        //}
+        //else {
+          //  JOptionPane.showMessageDialog(this, "Silmeyi onaylamak için Kullanıcı Adı ve Şifrenizi giriniz.");
+        //}
+    }//GEN-LAST:event_btnSilActionPerformed
+
+    private void btnRehberlikYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRehberlikYapActionPerformed
+        VeriTabani veriTabani = new VeriTabani();
+        Kullanici kullanici = this.kullanici;
+        Kullanici rehber = veriTabani.kullaniciAl(veriTabani, kullanici);
+
+        System.out.println(rehber.getDurum());
+
+        if (rehber.getDurum().equals("Kullanıcı")){
+            veriTabani.durumRehber(veriTabani, rehber);
+
+            rehber = veriTabani.kullaniciAl(veriTabani,rehber);
+        }else {
+            veriTabani.durumKullanıcı(veriTabani, rehber);
+
+            rehber = veriTabani.kullaniciAl(veriTabani,rehber);
+        }
+
+
+
+        lblDurum.setText("Durum : " + rehber.getDurum());
+    }//GEN-LAST:event_btnRehberlikYapActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -625,16 +681,26 @@ public class AnaEkran extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AnaEkran().setVisible(true);
+                //new AnaEkran().setVisible(true);
             }
         });
     }
 
-    public void kullanıcıBilgi(VeriTabani VeriTabani, Kullanici kullanıcı){
-        kullanıcı = VeriTabani.kullaniciAl(VeriTabani, kullanıcı);
+
+    /*
+    * Ana Ekrandaki bilgi alanlarına kullanıcı bilgilerini yerleştiren method
+     */
+    public void kullanıcıBilgi(){
+        VeriTabani veriTabani = new VeriTabani();
+        Kullanici kullanıcı = this.kullanici;
+        kullanıcı = veriTabani.kullaniciAl(veriTabani, kullanici);
+
+        String[] array = veriTabani.sehirleriAl(veriTabani).toArray(new String[veriTabani.sehirleriAl(veriTabani).size()]);
 
 
         lblHosgeldiniz.setText("Hoşgeldiniz " + kullanıcı.getKullaniciAdi().toUpperCase());
+
+        lblDurum.setText(lblDurum.getText() + kullanıcı.getDurum());
 
         lblProAd.setText(lblProAd.getText() + kullanıcı.getKullaniciAdi());
         lblProEmail.setText(lblProEmail.getText() + kullanıcı.getEmail());
@@ -645,6 +711,10 @@ public class AnaEkran extends javax.swing.JFrame {
         tfAyarEmail.setText(kullanıcı.getEmail());
         tfAyarGsm.setText(kullanıcı.getGsm());
         pfAyarSifre.setText(kullanıcı.getSifre());
+        cbAyarSehir.setModel(new DefaultComboBoxModel<String>(array));
+        cbAyarSehir.setSelectedItem(kullanıcı.getSehir());
+
+        cbSehir.setModel(new DefaultComboBoxModel<String>(array));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -657,13 +727,13 @@ public class AnaEkran extends javax.swing.JFrame {
     private javax.swing.JButton btnRehberOl;
     private javax.swing.JButton btnRehberlikYap;
     private javax.swing.JButton btnSil;
+    private javax.swing.JComboBox<String> cbAyarSehir;
+    private javax.swing.JComboBox<String> cbSehir;
     private javax.swing.JPanel crdAnasayfa;
     private javax.swing.JPanel crdAyarlar;
     private javax.swing.JPanel crdProfil;
     private javax.swing.JPanel crdRehberBul;
     private javax.swing.JPanel crdRehberOl;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

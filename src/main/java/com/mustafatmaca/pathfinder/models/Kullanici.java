@@ -10,6 +10,8 @@ public class Kullanici {
     private String email;
     private String gsm;
     private String sehir;
+    private int puan = 0;
+    private String durum;
 
     public Kullanici(int id, String kullaniciAdi, String sifre, String email, String gsm, String sehir) {
         this.id = id;
@@ -18,6 +20,16 @@ public class Kullanici {
         this.email = email;
         this.gsm = gsm;
         this.sehir = sehir;
+    }
+
+    public Kullanici(String kullaniciAdi, String sifre, String email, String gsm, String sehir, int puan, String durum) {
+        this.kullaniciAdi = kullaniciAdi;
+        this.sifre = sifre;
+        this.email = email;
+        this.gsm = gsm;
+        this.sehir = sehir;
+        this.puan = puan;
+        this.durum = durum;
     }
 
     public Kullanici(String kullaniciAdi, String sifre, String email, String gsm, String sehir) {
@@ -81,6 +93,21 @@ public class Kullanici {
     public void setSehir(String sehir) {
         this.sehir = sehir;
     }
-    
-    
+
+    public int getPuan() {
+        return puan;
+    }
+
+    public void setPuan(int puan) {
+        this.puan = puan;
+    }
+
+    public String getDurum() {
+        return durum;
+    }
+
+    public void setDurum(String durum) {
+        this.durum = durum;
+    }
+
 }
