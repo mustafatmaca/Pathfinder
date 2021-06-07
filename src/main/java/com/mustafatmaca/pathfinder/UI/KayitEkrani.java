@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mustafatmaca.pathfinder.UI;
 
 import com.mustafatmaca.pathfinder.database.VeriTabani;
@@ -15,9 +10,6 @@ import javax.swing.*;
  */
 public class KayitEkrani extends javax.swing.JFrame {
 
-    /**
-     * Creates new form KayitEkrani
-     */
     public KayitEkrani() {
         initComponents();
     }
@@ -42,11 +34,13 @@ public class KayitEkrani extends javax.swing.JFrame {
         pfSifre = new javax.swing.JPasswordField();
         tfEmail = new javax.swing.JTextField();
         tfGsm = new javax.swing.JTextField();
-        tfSehir = new javax.swing.JTextField();
+        cbKayitSehir = new javax.swing.JComboBox<>();
         btnHesabimVar = new javax.swing.JButton();
         btnKayitOl = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pathfinder");
+        setName("frameKayitEkrani"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -99,10 +93,10 @@ public class KayitEkrani extends javax.swing.JFrame {
         tfGsm.setToolTipText("GSM giriniz.");
         tfGsm.setBorder(null);
 
-        tfSehir.setBackground(new java.awt.Color(255, 204, 51));
-        tfSehir.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        tfSehir.setToolTipText("Şehir giriniz.");
-        tfSehir.setBorder(null);
+        cbKayitSehir.setBackground(new java.awt.Color(255, 204, 51));
+        cbKayitSehir.setForeground(new java.awt.Color(51, 51, 51));
+        cbKayitSehir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbKayitSehir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         btnHesabimVar.setBackground(new java.awt.Color(255, 204, 51));
         btnHesabimVar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -147,11 +141,11 @@ public class KayitEkrani extends javax.swing.JFrame {
                         .addComponent(btnHesabimVar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnKayitOl, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tfSehir)
                     .addComponent(tfEmail)
                     .addComponent(tfKullaniciAdi)
                     .addComponent(tfGsm)
-                    .addComponent(pfSifre))
+                    .addComponent(pfSifre)
+                    .addComponent(cbKayitSehir, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(68, 99, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -177,10 +171,10 @@ public class KayitEkrani extends javax.swing.JFrame {
                     .addComponent(lblGsm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfGsm, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSehir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfSehir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblSehir, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(cbKayitSehir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHesabimVar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnKayitOl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,21 +199,20 @@ public class KayitEkrani extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHesabimVarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHesabimVarActionPerformed
-        // TODO add your handling code here:
         GirisEkrani girisEkrani = new GirisEkrani();
         girisEkrani.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnHesabimVarActionPerformed
 
     private void btnKayitOlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKayitOlActionPerformed
-        // TODO add your handling code here:
         VeriTabani VeriTabani = new VeriTabani();
 
-        if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && !tfGsm.getText().isEmpty() && !tfSehir.getText().isEmpty()){
-            Kullanici kullanıcı = new Kullanici(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), tfSehir.getText());
+        if (!tfKullaniciAdi.getText().isEmpty() && !pfSifre.getText().isEmpty() && !tfEmail.getText().isEmpty() && !tfGsm.getText().isEmpty() && !cbKayitSehir.getSelectedItem().toString().isEmpty()){
+            Kullanici kullanıcı = new Kullanici(tfKullaniciAdi.getText(), pfSifre.getText(), tfEmail.getText(), tfGsm.getText(), cbKayitSehir.getSelectedItem().toString());
             if(!VeriTabani.kayitKontrol(VeriTabani, kullanıcı)){
                 VeriTabani.kayitOlustur(VeriTabani, kullanıcı);
 
@@ -239,44 +232,23 @@ public class KayitEkrani extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnKayitOlActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KayitEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KayitEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KayitEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KayitEkrani.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new KayitEkrani().setVisible(true);
-            }
-        });
+    /**
+     * cbKayitSehir'e şehirleri ekleyen method
+     **/
+    public void sehirBilgi(){
+        VeriTabani veriTabani = new VeriTabani();
+
+        String[] array = veriTabani.sehirleriAl(veriTabani);
+
+        cbKayitSehir.setModel(new DefaultComboBoxModel<String>(array));
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHesabimVar;
     private javax.swing.JButton btnKayitOl;
+    private javax.swing.JComboBox<String> cbKayitSehir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGsm;
@@ -288,6 +260,5 @@ public class KayitEkrani extends javax.swing.JFrame {
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfGsm;
     private javax.swing.JTextField tfKullaniciAdi;
-    private javax.swing.JTextField tfSehir;
     // End of variables declaration//GEN-END:variables
 }

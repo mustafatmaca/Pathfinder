@@ -11,7 +11,7 @@ public class Kullanici {
     private String gsm;
     private String sehir;
     private int puan = 0;
-    private String durum;
+    private String durum = "Kullanıcı";
 
     public Kullanici(int id, String kullaniciAdi, String sifre, String email, String gsm, String sehir) {
         this.id = id;

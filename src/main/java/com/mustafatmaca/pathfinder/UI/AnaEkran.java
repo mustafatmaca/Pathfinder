@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mustafatmaca.pathfinder.UI;
 
 import com.mustafatmaca.pathfinder.database.VeriTabani;
@@ -10,16 +5,16 @@ import com.mustafatmaca.pathfinder.models.Kullanici;
 
 import javax.swing.*;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Muallim
  */
 public class AnaEkran extends javax.swing.JFrame {
     Kullanici kullanici;
-
-            /**
-             * Creates new form AnaSayfa
-             */
     CardLayout cardLayout;
     
     public AnaEkran(Kullanici kullanici) {
@@ -59,7 +54,7 @@ public class AnaEkran extends javax.swing.JFrame {
         lblSehirSec = new javax.swing.JLabel();
         cbSehir = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstRehber = new javax.swing.JList<>();
         crdRehberOl = new javax.swing.JPanel();
         lblDurum = new javax.swing.JLabel();
         btnRehberlikYap = new javax.swing.JButton();
@@ -87,6 +82,8 @@ public class AnaEkran extends javax.swing.JFrame {
         btnSil = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pathfinder");
+        setName("frameAnaEkran"); // NOI18N
 
         pnlSekme.setBackground(new java.awt.Color(51, 51, 51));
         pnlSekme.setPreferredSize(new java.awt.Dimension(200, 575));
@@ -267,15 +264,10 @@ public class AnaEkran extends javax.swing.JFrame {
         cbSehir.setForeground(new java.awt.Color(255, 204, 51));
         cbSehir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jList1.setBackground(new java.awt.Color(51, 51, 51));
-        jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jList1.setForeground(new java.awt.Color(255, 204, 51));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        lstRehber.setBackground(new java.awt.Color(51, 51, 51));
+        lstRehber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lstRehber.setForeground(new java.awt.Color(255, 204, 51));
+        jScrollPane1.setViewportView(lstRehber);
 
         javax.swing.GroupLayout crdRehberBulLayout = new javax.swing.GroupLayout(crdRehberBul);
         crdRehberBul.setLayout(crdRehberBulLayout);
@@ -462,6 +454,11 @@ public class AnaEkran extends javax.swing.JFrame {
         btnGuncelle.setText("Güncelle");
         btnGuncelle.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuncelle.setFocusPainted(false);
+        btnGuncelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuncelleActionPerformed(evt);
+            }
+        });
 
         btnSil.setBackground(new java.awt.Color(51, 51, 51));
         btnSil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -570,37 +567,32 @@ public class AnaEkran extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnasayfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnasayfaActionPerformed
-        // TODO add your handling code here:
         cardLayout.show(pnlCards, "pnlCard1");
     }//GEN-LAST:event_btnAnasayfaActionPerformed
 
     private void btnRehberBulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRehberBulActionPerformed
-        // TODO add your handling code here:
         cardLayout.show(pnlCards, "pnlCard2");
     }//GEN-LAST:event_btnRehberBulActionPerformed
 
     private void btnProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfilActionPerformed
-        // TODO add your handling code here:
         cardLayout.show(pnlCards, "pnlCard4");
     }//GEN-LAST:event_btnProfilActionPerformed
 
     private void btnAyarlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyarlarActionPerformed
-        // TODO add your handling code here:
         cardLayout.show(pnlCards, "pnlCard5");
     }//GEN-LAST:event_btnAyarlarActionPerformed
 
     private void btnCikisYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCikisYapActionPerformed
-        // TODO add your handling code here:
         GirisEkrani girisEkrani = new GirisEkrani();
         girisEkrani.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnCikisYapActionPerformed
 
     private void btnRehberOlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRehberOlActionPerformed
-        // TODO add your handling code here:
         cardLayout.show(pnlCards, "pnlCard3");
     }//GEN-LAST:event_btnRehberOlActionPerformed
 
@@ -609,7 +601,7 @@ public class AnaEkran extends javax.swing.JFrame {
         Kullanici kullanici = this.kullanici;
         kullanici = veriTabani.kullaniciAl(veriTabani, kullanici);
 
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Hesabınızı kalıcı olarak silmeyi onaylıyor musunuz?");
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Hesabınızı kalıcı olarak silmeyi onaylıyor musunuz?", "Uyarı", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION){
             veriTabani.deleteUser(veriTabani, kullanici);
 
@@ -617,23 +609,12 @@ public class AnaEkran extends javax.swing.JFrame {
             girisEkrani.setVisible(true);
             setVisible(false);
         }
-
-
-        //if (!tfAyarAd.getText().isEmpty() && !pfAyarSifre.getText().isEmpty()){
-            //Kullanici kullanici = new Kullanici(tfAyarAd.getText(), pfAyarSifre.getText());
-            //veriTabani.deleteUser(veriTabani, kullanici);
-        //}
-        //else {
-          //  JOptionPane.showMessageDialog(this, "Silmeyi onaylamak için Kullanıcı Adı ve Şifrenizi giriniz.");
-        //}
     }//GEN-LAST:event_btnSilActionPerformed
 
     private void btnRehberlikYapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRehberlikYapActionPerformed
         VeriTabani veriTabani = new VeriTabani();
         Kullanici kullanici = this.kullanici;
         Kullanici rehber = veriTabani.kullaniciAl(veriTabani, kullanici);
-
-        System.out.println(rehber.getDurum());
 
         if (rehber.getDurum().equals("Kullanıcı")){
             veriTabani.durumRehber(veriTabani, rehber);
@@ -645,67 +626,90 @@ public class AnaEkran extends javax.swing.JFrame {
             rehber = veriTabani.kullaniciAl(veriTabani,rehber);
         }
 
-
-
         lblDurum.setText("Durum : " + rehber.getDurum());
     }//GEN-LAST:event_btnRehberlikYapActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnaEkran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnaEkran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnaEkran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnaEkran.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnGuncelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuncelleActionPerformed
+        VeriTabani veriTabani = new VeriTabani();
+        Kullanici kullanici = this.kullanici;
+
+        String eskiKullaniciAdi = kullanici.getKullaniciAdi();
+
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Bilgilerinizi güncellemek istiyor musunuz?", "Uyarı", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION){
+            kullanici.setKullaniciAdi(tfAyarAd.getText());
+            kullanici.setSifre(pfAyarSifre.getText());
+            kullanici.setEmail(tfAyarEmail.getText());
+            kullanici.setGsm(tfAyarGsm.getText());
+            kullanici.setSehir(cbAyarSehir.getSelectedItem().toString());
+
+            veriTabani.updateUser(veriTabani, kullanici, eskiKullaniciAdi);
+
+            JOptionPane.showMessageDialog(this, "Bilgileriniz Güncellendi!", "Güncelleme", JOptionPane.INFORMATION_MESSAGE);
+
+            tfAyarAd.setText(kullanici.getKullaniciAdi());
+            tfAyarEmail.setText(kullanici.getEmail());
+            tfAyarGsm.setText(kullanici.getGsm());
+            pfAyarSifre.setText(kullanici.getSifre());
+            cbAyarSehir.setSelectedItem(kullanici.getSehir());
+
+            lblProAd.setText("Kullanıcı Adı : " + kullanici.getKullaniciAdi());
+            lblProEmail.setText("Email : " + kullanici.getEmail());
+            lblProGsm.setText("GSM : " + kullanici.getGsm());
+            lblProSehir.setText("Şehir : " + kullanici.getSehir());
         }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new AnaEkran().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_btnGuncelleActionPerformed
 
 
-    /*
+    /**
     * Ana Ekrandaki bilgi alanlarına kullanıcı bilgilerini yerleştiren method
-     */
+    **/
     public void kullanıcıBilgi(){
         VeriTabani veriTabani = new VeriTabani();
         Kullanici kullanıcı = this.kullanici;
         kullanıcı = veriTabani.kullaniciAl(veriTabani, kullanici);
 
-        String[] array = veriTabani.sehirleriAl(veriTabani).toArray(new String[veriTabani.sehirleriAl(veriTabani).size()]);
+        String[] array = veriTabani.sehirleriAl(veriTabani);
 
 
         lblHosgeldiniz.setText("Hoşgeldiniz " + kullanıcı.getKullaniciAdi().toUpperCase());
 
+
+        cbSehir.setModel(new DefaultComboBoxModel<String>(array));
+        DefaultListModel defaultListModel = new DefaultListModel();
+
+        cbSehir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sehir = cbSehir.getSelectedItem().toString();
+                List<Kullanici> kullaniciList = veriTabani.rehberleriAl(veriTabani, sehir);
+                if (!kullaniciList.isEmpty()){
+                    defaultListModel.clear();
+                    List<String> rehberler = new ArrayList<>();
+                    for (Kullanici kullanici : kullaniciList) {
+                        rehberler.add(kullanici.getKullaniciAdi());
+                    }
+                    for (int i = 0; i<rehberler.size(); i++) {
+                        defaultListModel.addElement(rehberler.get(i));
+                    }
+                    lstRehber.setModel(defaultListModel);
+                }else {
+                    defaultListModel.clear();
+                    JOptionPane.showMessageDialog(crdAnasayfa, "Bu Şehirde Rehber Bulunmuyor!", "Uyarı", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+
         lblDurum.setText(lblDurum.getText() + kullanıcı.getDurum());
+
 
         lblProAd.setText(lblProAd.getText() + kullanıcı.getKullaniciAdi());
         lblProEmail.setText(lblProEmail.getText() + kullanıcı.getEmail());
         lblProGsm.setText(lblProGsm.getText() + kullanıcı.getGsm());
         lblProSehir.setText(lblProSehir.getText() + kullanıcı.getSehir());
+
 
         tfAyarAd.setText(kullanıcı.getKullaniciAdi());
         tfAyarEmail.setText(kullanıcı.getEmail());
@@ -714,8 +718,8 @@ public class AnaEkran extends javax.swing.JFrame {
         cbAyarSehir.setModel(new DefaultComboBoxModel<String>(array));
         cbAyarSehir.setSelectedItem(kullanıcı.getSehir());
 
-        cbSehir.setModel(new DefaultComboBoxModel<String>(array));
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnasayfa;
@@ -734,7 +738,6 @@ public class AnaEkran extends javax.swing.JFrame {
     private javax.swing.JPanel crdProfil;
     private javax.swing.JPanel crdRehberBul;
     private javax.swing.JPanel crdRehberOl;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -758,6 +761,7 @@ public class AnaEkran extends javax.swing.JFrame {
     private javax.swing.JLabel lblRehberBul;
     private javax.swing.JLabel lblRehberOl;
     private javax.swing.JLabel lblSehirSec;
+    private javax.swing.JList<String> lstRehber;
     private javax.swing.JPasswordField pfAyarSifre;
     private javax.swing.JPanel pnlCards;
     private javax.swing.JPanel pnlSekme;
